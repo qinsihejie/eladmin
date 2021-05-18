@@ -13,40 +13,36 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package me.zhengjie.domain.vo;
+package me.zhengjie.domain;
 
-import lombok.AllArgsConstructor;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import java.util.List;
+import java.io.Serializable;
 
 /**
- * 发送邮件时，接收参数的类
- * @author 郑杰
- * @date 2018/09/28 12:02:14
+ * 暗号化&复号化
+ * @author lfwang
+ * @date 2021-05-06
  */
 @Data
-@AllArgsConstructor
-public class EmailVo {
-    public EmailVo() {
-    }
-
-    public EmailVo(List<String> tos, String subject, String content) {
-        this.tos = tos;
-        this.subject = subject;
-        this.content = content;
-    }
-
-    @NotEmpty
-    private List<String> tos;
-
-    private List<String> copys;
+public class EncryptAndDecodeConfig implements Serializable {
 
     @NotBlank
-    private String subject;
+    @ApiModelProperty(value = "加密/解密选择", hidden = true)
+    private String type;
 
     @NotBlank
-    private String content;
+    @ApiModelProperty(value = "加密/解密原字符")
+    private String origin;
+
+    @ApiModelProperty(value = "加密/解密结果")
+    private String result;
+
+    @ApiModelProperty(value = "ivKey")
+    private String ivKey;
+
+    @ApiModelProperty(value = "aesKey")
+    private String aesKey;
 }
